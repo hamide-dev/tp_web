@@ -27,7 +27,7 @@ if( !empty($name_filiere) and !empty($descript_filiere) ){
 
     if($element>0){
         $bool = true ; 
-        $info = "la filiere que vous souhaitez enregistrer dans la base de donnes existe dejà" ;
+        $info = "la filiere $name_filiere que vous souhaitez enregistrer dans la base de donnes existe dejà" ;
     }
     else{  
         $bool = false ;
@@ -42,9 +42,6 @@ if( !empty($name_filiere) and !empty($descript_filiere) ){
 
 
 } 
- 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,15 +52,19 @@ if( !empty($name_filiere) and !empty($descript_filiere) ){
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <?php if(isset($_POST['filiere'])) :?>
-        <div>
-                <?php if($bool) :?>
-                    <div class="red"><p><?=$info?></p></div>
-                <?php else :?> 
-                    <div class="vert"><p> la filieres <?$name_filiere?> à bien ete ajouter dans la base de données</p></div>
-                <?php endif?>    
-        </div>
-    <?php endif ?>
+<?php
+if(isset($_POST['filiere'])) {
+    if(empty($_POST['filiere'])) {
+        echo '<p>Veuillez saisir une filière.</p>';
+    } else {
+        if($bool) {
+            echo '<div class="red"><p>'.htmlentities($info).'</p></div>';
+        } else {
+            echo "<div class='vert'><p> La filière  . htmlentities($name_filiere) .  a bien été ajoutée dans la base de données</p></div>";
+        }
+    }
+}
+?>
     <pre>
         <h1>espace administrateur</h1>
     </pre>
